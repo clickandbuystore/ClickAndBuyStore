@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ============================================
+       METADATOS
+       ============================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Click & Buy Store - Electrónica, decoración y más. Pedidos por WhatsApp.">
+
+  <title>Click & Buy Store</title>
+
+  <link rel="icon" type="image/jpeg" href="img/logo/logo-favicon.jpg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================
+       CABECERA (HEADER)
+       ============================================ -->
+  <header class="cabecera">
+
+    <a href="#" class="cabecera__logo" aria-label="Ir al inicio">
+      <img src="img/logo/logo-header.jpg" alt="Click & Buy Store">
+    </a>
+
+    <nav class="cabecera__menu" id="menuCategorias">
+      <button class="cabecera__menu-boton" data-vista="inicio">Inicio</button>
+      <button class="cabecera__menu-boton" data-vista="decoracion">Decoración</button>
+      <button class="cabecera__menu-boton" data-vista="electronica">Electrónica</button>
+      <button class="cabecera__menu-boton" data-vista="ropa">Ropa</button>
+      <button class="cabecera__menu-boton" data-vista="accesorios">Accesorios</button>
+      <button class="cabecera__menu-boton" data-vista="novedades">Novedades</button>
+    </nav>
+
+    <div class="cabecera__buscador">
+      <input 
+        type="search" 
+        id="buscador" 
+        placeholder="Buscar productos..." 
+        aria-label="Buscar productos"
+      >
+    </div>
+
+    <button class="cabecera__carrito" id="botonCarrito" aria-label="Abrir carrito">
+      <span class="cabecera__carrito-icono">🛒</span>
+      <span class="cabecera__carrito-contador" id="contadorCarrito">0</span>
+    </button>
+
+  </header>
+
+  <!-- ============================================
+       CONTENIDO PRINCIPAL
+       ============================================ -->
+  <main class="contenido">
+
+    <!-- VISTA DE INICIO -->
+    <section class="vista vista--activa" id="vistaInicio">
+
+      <div class="hero">
+        <h1 class="hero__titulo">Click &amp; Buy Store</h1>
+        <p class="hero__frase">Tu próxima compra está a un click</p>
+        <p class="hero__ubicacion">Argentina · Buenos Aires · La Plata</p>
+        <button class="hero__boton" id="botonExplorar">Explorar</button>
+      </div>
+
+      <section class="novedades" id="seccionNovedades">
+        <h2 class="novedades__titulo">Novedades</h2>
+
+        <div class="novedades__lista" id="listaNovedades">
+
+          <!-- ==================================================
+               NOVEDAD 1
+               Para agregar más: copiá este <article> completo,
+               pegalo debajo y cambiá título, fecha y texto.
+               ================================================== -->
+          <article class="novedad">
+            <div class="novedad__cabecera">
+              <h3 class="novedad__titulo">¡Bienvenidos a Click &amp; Buy Store!</h3>
+              <span class="novedad__fecha">Octubre 2026</span>
+            </div>
+            <p class="novedad__texto">
+              Estamos estrenando la página y todavía hay algunos detalles por pulir.
+              Si encontrás algún error o algo que no funcione bien, avisanos por
+              Instagram o WhatsApp y lo solucionamos lo antes posible. ¡Gracias por
+              la paciencia y bienvenidos! :)
+            </p>
+          </article>
+
+          <!-- // Acá agregarás más novedades manualmente. -->
+
+        </div>
+      </section>
+
+    </section>
+
+    <!-- VISTA DE CATEGORÍA -->
+    <section class="vista" id="vistaCategoria">
+
+      <div class="categoria__cabecera">
+        <h2 class="vista__titulo" id="tituloCategoria">Categoría</h2>
+
+        <select class="categoria__orden" id="ordenProductos" aria-label="Ordenar productos">
+          <option value="relevancia">Relevancia</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre-asc">Nombre: A - Z</option>
+        </select>
+      </div>
+
+      <div class="categoria__chips" id="chipsSubcategorias"></div>
+
+      <div class="categoria__grilla" id="grillaProductos"></div>
+
+      <p class="categoria__vacio" id="categoriaVacio" hidden>
+        No encontramos productos con esos criterios.
+      </p>
+
+    </section>
+
+    <!-- VISTA DE "PRÓXIMAMENTE" -->
+    <section class="vista" id="vistaProximamente">
+      <h2 class="vista__titulo" id="tituloProximamente">Próximamente...</h2>
+      <p class="vista__texto">Estamos preparando esta categoría. ¡Volvé pronto!</p>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       PANEL DEL PRODUCTO (SUPERPOSICIÓN)
+       ============================================ -->
+  <div class="panel-producto" id="panelProducto" aria-hidden="true" role="dialog" aria-modal="true">
+
+    <div class="panel-producto__fondo" id="panelFondo"></div>
+
+    <div class="panel-producto__caja">
+
+      <button 
+        class="panel-producto__cerrar" 
+        id="cerrarPanelProducto" 
+        aria-label="Cerrar panel del producto"
+      >×</button>
+
+      <div class="panel-producto__grid">
+
+        <div class="pp-slider">
+          <div class="pp-slider__visor">
+            <img class="pp-slider__imagen" id="ppSliderImagen" alt="">
+            <button class="pp-slider__flecha pp-slider__flecha--izq" id="ppFlechaIzq" aria-label="Imagen anterior">‹</button>
+            <button class="pp-slider__flecha pp-slider__flecha--der" id="ppFlechaDer" aria-label="Imagen siguiente">›</button>
+            <span class="pp-slider__contador" id="ppSliderContador"></span>
+          </div>
+          <div class="pp-slider__miniaturas" id="ppSliderMiniaturas"></div>
+        </div>
+
+        <div class="pp-info">
+          <span class="pp-info__subcategoria" id="ppSubcategoria"></span>
+          <h2 class="pp-info__nombre" id="ppNombre"></h2>
+          <p class="pp-info__precio" id="ppPrecio"></p>
+          <p class="pp-info__descripcion" id="ppDescripcion"></p>
+
+          <div class="pp-info__seccion">
+            <h3 class="pp-info__subtitulo">Especificaciones</h3>
+            <ul class="pp-info__lista" id="ppListaEspecificaciones"></ul>
+          </div>
+
+          <button class="pp-info__agregar" id="ppBotonAgregar">Agregar al carrito</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       CARRITO LATERAL
+       ============================================ -->
+  <div class="carrito-overlay" id="carritoOverlay" hidden></div>
+
+  <aside class="panel-carrito" id="panelCarrito" aria-hidden="true" role="dialog" aria-modal="true">
+
+    <div class="panel-carrito__cabecera">
+      <h2 class="panel-carrito__titulo">Tu carrito</h2>
+      <button class="panel-carrito__cerrar" id="cerrarPanelCarrito" aria-label="Cerrar carrito">×</button>
+    </div>
+
+    <div class="panel-carrito__contenido" id="carritoContenido"></div>
+
+    <div class="panel-carrito__footer" id="carritoFooter" hidden>
+      <div class="carrito__total">
+        <span class="carrito__total-etiqueta">Total</span>
+        <span class="carrito__total-valor" id="carritoTotal">$0</span>
+      </div>
+
+      <button class="carrito__finalizar" id="botonFinalizarCompra">
+        Finalizar pedido
+      </button>
+
+      <!-- Botón secundario: vaciar todo el carrito -->
+      <button class="carrito__vaciar" id="botonVaciarCarrito">
+        Vaciar carrito
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ============================================
+       MODAL DE PEDIDO
+       ============================================ -->
+  <div class="modal-pedido" id="modalPedido" hidden>
+
+    <div class="modal-pedido__overlay" data-cerrar-modal></div>
+
+    <div class="modal-pedido__caja">
+
+      <button class="modal-pedido__cerrar" data-cerrar-modal aria-label="Cerrar">×</button>
+
+      <div class="modal-pedido__paso" id="pasoFormulario">
+        <h2 class="modal-pedido__titulo">Finalizar pedido</h2>
+        <p class="modal-pedido__subtitulo">
+          Completá tus datos y generamos el mensaje automáticamente.
+        </p>
+
+        <form class="form-pedido" id="formPedido" novalidate>
+          <label class="form-pedido__campo">
+            <span class="form-pedido__label">Nombre y apellido *</span>
+            <input type="text" id="pedidoNombre" required autocomplete="name" placeholder="Ej: Juan Pérez">
+          </label>
+
+          <label class="form-pedido__campo">
+            <span class="form-pedido__label">Localidad y zona de entrega / encuentro *</span>
+            <input type="text" id="pedidoLocalidad" required placeholder="Ej: La Plata centro">
+          </label>
+
+          <label class="form-pedido__campo">
+            <span class="form-pedido__label">Encuentro a coordinar *</span>
+            <input type="text" id="pedidoEncuentro" required placeholder="Ej: Plaza Moreno, sábado por la tarde">
+          </label>
+
+          <label class="form-pedido__campo">
+            <span class="form-pedido__label">Comentarios (opcional)</span>
+            <textarea id="pedidoComentarios" rows="3" placeholder="Cualquier aclaración adicional"></textarea>
+          </label>
+
+          <p class="form-pedido__error" id="formPedidoError" hidden></p>
+
+          <button type="submit" class="form-pedido__boton">Continuar</button>
+        </form>
+      </div>
+
+      <div class="modal-pedido__paso" id="pasoPreview" hidden>
+        <h2 class="modal-pedido__titulo">Revisá tu pedido</h2>
+        <p class="modal-pedido__subtitulo">
+          Este es el mensaje que se enviará. Podés volver atrás para editarlo.
+        </p>
+
+        <pre class="modal-pedido__preview" id="previewMensaje"></pre>
+
+        <div class="modal-pedido__acciones">
+          <button class="modal-pedido__volver" id="volverFormulario">← Editar datos</button>
+          <button class="modal-pedido__enviar" id="botonMandarWhatsapp">
+            Mandar mensaje al WhatsApp
+          </button>
+        </div>
+
+        <div class="modal-pedido__opciones" id="opcionesWhatsapp" hidden>
+          <p class="modal-pedido__opciones-titulo">Elegí a quién enviar:</p>
+          <div class="modal-pedido__opciones-botones">
+            <button class="btn-whatsapp" data-numero="5492213631697">
+              <span class="btn-whatsapp__nombre">Juan</span>
+              <span class="btn-whatsapp__numero">+54 9 221 363 1697</span>
+            </button>
+            <button class="btn-whatsapp" data-numero="5492215957881">
+              <span class="btn-whatsapp__nombre">Erick</span>
+              <span class="btn-whatsapp__numero">+54 9 221 595 7881</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+
+    <div class="footer__redes">
+      <p class="footer__etiqueta">Seguinos en Instagram</p>
+      <div class="footer__instagram">
+        <a href="https://instagram.com/clickandbuystore_" target="_blank" rel="noopener">@clickandbuystore_</a>
+        <a href="https://instagram.com/juanxch_" target="_blank" rel="noopener">@juanxch_</a>
+        <a href="https://instagram.com/uld_erick_" target="_blank" rel="noopener">@uld_erick_</a>
+      </div>
+    </div>
+
+    <div class="footer__contacto">
+      <p class="footer__etiqueta">Contacto por WhatsApp</p>
+      <p class="footer__whatsapp">Juan: +54 9 221 363 1697</p>
+      <p class="footer__whatsapp">Erick: +54 9 221 595 7881</p>
+    </div>
+
+    <div class="footer__aviso">
+      <p>Los pedidos se confirman por WhatsApp. No realizamos cobros automáticos desde esta página.</p>
+      <p class="footer__copy">© <span id="anioActual">2026</span> Click &amp; Buy Store</p>
+    </div>
+
+  </footer>
+
+  <!-- ============================================================
+       TOAST (aviso flotante)
+       Se usa para avisar cosas como "Carrito vaciado" o
+       "Abriendo WhatsApp…". Aparece abajo, centrado.
+       ============================================================ -->
+  <div class="toast" id="toast" hidden role="status" aria-live="polite">
+    <span class="toast__icono">✓</span>
+    <span class="toast__texto" id="toastTexto"></span>
+  </div>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>
