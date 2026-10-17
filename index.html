@@ -69,11 +69,7 @@
 
         <div class="novedades__lista" id="listaNovedades">
 
-          <!-- ==================================================
-               NOVEDAD 1
-               Para agregar más: copiá este <article> completo,
-               pegalo debajo y cambiá título, fecha y texto.
-               ================================================== -->
+          <!-- // Acá agregarás más novedades manualmente. -->
           <article class="novedad">
             <div class="novedad__cabecera">
               <h3 class="novedad__titulo">¡Bienvenidos a Click &amp; Buy Store!</h3>
@@ -86,8 +82,6 @@
               la paciencia y bienvenidos! :)
             </p>
           </article>
-
-          <!-- // Acá agregarás más novedades manualmente. -->
 
         </div>
       </section>
@@ -127,7 +121,7 @@
   </main>
 
   <!-- ============================================
-       PANEL DEL PRODUCTO (SUPERPOSICIÓN)
+       PANEL DEL PRODUCTO
        ============================================ -->
   <div class="panel-producto" id="panelProducto" aria-hidden="true" role="dialog" aria-modal="true">
 
@@ -195,7 +189,6 @@
         Finalizar pedido
       </button>
 
-      <!-- Botón secundario: vaciar todo el carrito -->
       <button class="carrito__vaciar" id="botonVaciarCarrito">
         Vaciar carrito
       </button>
@@ -227,18 +220,27 @@
           </label>
 
           <label class="form-pedido__campo">
-            <span class="form-pedido__label">Localidad y zona de entrega / encuentro *</span>
-            <input type="text" id="pedidoLocalidad" required placeholder="Ej: La Plata centro">
+            <span class="form-pedido__label">Motivo de contacto *</span>
+            <select id="pedidoMotivo" required>
+              <option value="Quiero hacer un pedido">Quiero hacer un pedido</option>
+              <option value="Solo consultar info">Solo consultar info</option>
+              <option value="Coordinar un encuentro">Coordinar un encuentro</option>
+            </select>
           </label>
 
           <label class="form-pedido__campo">
-            <span class="form-pedido__label">Encuentro a coordinar *</span>
-            <input type="text" id="pedidoEncuentro" required placeholder="Ej: Plaza Moreno, sábado por la tarde">
+            <span class="form-pedido__label">Localidad / Zona (opcional)</span>
+            <input type="text" id="pedidoLocalidad" placeholder="Ej: La Plata centro">
           </label>
 
           <label class="form-pedido__campo">
-            <span class="form-pedido__label">Comentarios (opcional)</span>
-            <textarea id="pedidoComentarios" rows="3" placeholder="Cualquier aclaración adicional"></textarea>
+            <span class="form-pedido__label">Detalles de encuentro (opcional)</span>
+            <input type="text" id="pedidoEncuentro" placeholder="Ej: Plaza Moreno, sábado">
+          </label>
+
+          <label class="form-pedido__campo">
+            <span class="form-pedido__label">Comentarios extra (opcional)</span>
+            <textarea id="pedidoComentarios" rows="2" placeholder="Cualquier otra aclaración"></textarea>
           </label>
 
           <p class="form-pedido__error" id="formPedidoError" hidden></p>
@@ -262,20 +264,9 @@
           </button>
         </div>
 
-        <div class="modal-pedido__opciones" id="opcionesWhatsapp" hidden>
-          <p class="modal-pedido__opciones-titulo">Elegí a quién enviar:</p>
-          <div class="modal-pedido__opciones-botones">
-            <button class="btn-whatsapp" data-numero="5492213631697">
-              <span class="btn-whatsapp__nombre">Juan</span>
-              <span class="btn-whatsapp__numero">+54 9 221 363 1697</span>
-            </button>
-            <button class="btn-whatsapp" data-numero="5492215957881">
-              <span class="btn-whatsapp__nombre">Erick</span>
-              <span class="btn-whatsapp__numero">+54 9 221 595 7881</span>
-            </button>
-          </div>
-        </div>
-
+        <p class="modal-pedido__aviso">
+          El mensaje se enviará al WhatsApp del vendedor (Erick).
+        </p>
       </div>
     </div>
   </div>
@@ -288,15 +279,14 @@
     <div class="footer__redes">
       <p class="footer__etiqueta">Seguinos en Instagram</p>
       <div class="footer__instagram">
-        <a href="https://instagram.com/clickandbuystore_" target="_blank" rel="noopener">@clickandbuystore_</a>
-        <a href="https://instagram.com/juanxch_" target="_blank" rel="noopener">@juanxch_</a>
-        <a href="https://instagram.com/uld_erick_" target="_blank" rel="noopener">@uld_erick_</a>
+        <a href="https://instagram.com/clickandbuystore_" target="_blank" rel="noopener">Página de la cuenta: @clickandbuystore_</a>
+        <a href="https://instagram.com/juanxch_" target="_blank" rel="noopener">Creador de la Página: @juanxch_</a>
+        <a href="https://instagram.com/uld_erick_" target="_blank" rel="noopener">Vendedor: @uld_erick_</a>
       </div>
     </div>
 
     <div class="footer__contacto">
       <p class="footer__etiqueta">Contacto por WhatsApp</p>
-      <p class="footer__whatsapp">Juan: +54 9 221 363 1697</p>
       <p class="footer__whatsapp">Erick: +54 9 221 595 7881</p>
     </div>
 
@@ -307,11 +297,6 @@
 
   </footer>
 
-  <!-- ============================================================
-       TOAST (aviso flotante)
-       Se usa para avisar cosas como "Carrito vaciado" o
-       "Abriendo WhatsApp…". Aparece abajo, centrado.
-       ============================================================ -->
   <div class="toast" id="toast" hidden role="status" aria-live="polite">
     <span class="toast__icono">✓</span>
     <span class="toast__texto" id="toastTexto"></span>
